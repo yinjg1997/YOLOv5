@@ -34,10 +34,7 @@ data/images/*
 !data/images/zidane.jpg
 !data/images/bus.jpg
 !data/*.sh
-datasets/slide_captcha/images/train/*
-datasets/slide_captcha/images/val/*
-datasets/slide_captcha/labels/train/*
-datasets/slide_captcha/labels/val/*
+datasets/*
 
 results*.csv
 

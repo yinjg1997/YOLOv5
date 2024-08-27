@@ -564,6 +564,7 @@ def parse_opt(known=False):
         - Tutorial: https://docs.ultralytics.com/yolov5/tutorials/train_custom_data
     """
     parser = argparse.ArgumentParser()
+    # python train.py --weights yolov5s.pt --data data/pubg_player.yaml --name pubg --device cuda:0
     # 模型选择 不填表示从头开始训练 也可以指定模型进行训练
     # 这个参数是填写模型的。在default后面可以填写模型路径，下次训练就是在这个模型的基础上训练的。不过一般都是不填写，让它重新训练。
     parser.add_argument("--weights", type=str, default=ROOT / "yolov5s.pt", help="initial weights path")
@@ -573,7 +574,7 @@ def parse_opt(known=False):
 
     # 指定训练数据集.
     # --data：这个参数是用来指定数据集参数的。就是使用data文件夹里面的文件，但要使用的文件是自己定义的，这个地方需要注意。
-    parser.add_argument("--data", type=str, default=ROOT / "data/slide_captcha.yaml", help="dataset.yaml path")
+    parser.add_argument("--data", type=str, default=ROOT / "data/pubg_player.yaml", help="dataset.yaml path")
     # 超参数
     parser.add_argument("--hyp", type=str, default=ROOT / "data/hyps/hyp.scratch-low.yaml", help="hyperparameters path")
     # 迭代次数500到1000次. --epochs：这个参数设置迭代次数。默认值为300，就是训练总次数。数值越高对显卡要求就越高。一般默认或者提高到500-1000.

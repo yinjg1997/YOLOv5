@@ -369,6 +369,7 @@ def parse_opt():
     parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "yolov5s.pt", help="model path or triton URL")
     # 给模型指定检测目录 可以是文件夹下的所有图片、单个图片、本地视频、youtube视频链接、传输协议（视频推流？）
     # default='0' 开启摄像头
+    # python detect.py --weights runs/train/exp5/weights/best.pt --source screen --device cuda:0
     parser.add_argument("--source", type=str, default=ROOT / "data/images", help="file/dir/URL/glob/screen/0(webcam)")
     parser.add_argument("--data", type=str, default=ROOT / "data/coco128.yaml", help="(optional) dataset.yaml path")
     # 检测过程中的图片大小
