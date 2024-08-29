@@ -12,9 +12,9 @@ PyYAML>=5.3.1
 requests>=2.32.0
 scipy>=1.4.1
 thop>=0.1.1  # FLOPs computation
-torch==2.0.0+cu117  # see https://pytorch.org/get-started/locally (recommended)
-torchvision==0.15.0+cu117
-torchaudio==2.0.0+cu117
+torch
+torchvision
+torchaudio
 tqdm>=4.64.0
 ultralytics>=8.2.34  # https://ultralytics.com
 # protobuf<=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012
