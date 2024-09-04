@@ -224,7 +224,6 @@ class YOLOV5_ONNX(object):
         Returns:
 
         """
-        print(boxinfo)
         colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(len(self.classes))]
         for *xyxy, conf, cls in boxinfo:
             label = '%s %.2f' % (self.classes[int(cls)], conf)
