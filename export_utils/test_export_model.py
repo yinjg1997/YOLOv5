@@ -228,6 +228,7 @@ class YOLOV5_ONNX(object):
         for *xyxy, conf, cls in boxinfo:
             label = '%s %.2f' % (self.classes[int(cls)], conf)
             # print('xyxy: ', xyxy)
+            # 传的是 img 的引用
             self.plot_one_box(xyxy, img, label=label, color=colors[int(cls)], line_thickness=1)
 
         # cv2.namedWindow("dst",0)
@@ -237,7 +238,7 @@ class YOLOV5_ONNX(object):
         # cv2.imencode('.jpg', img)[1].tofile(os.path.join(dst, id + ".jpg"))
         return 0
 
-    def decect(self, file):
+    def detect(self, file):
         # 图片转换为矩阵
         if isinstance(file, np.ndarray):
             img = Image.fromarray(file)
@@ -265,7 +266,7 @@ if __name__ == "__main__":
     model.infer(img_path=img_path)  # infer 会进行画图
 
     start = time.time()
-    s = model.decect(img_path)  # decect 只检测
+    s = model.detect(img_path)  # decect 只检测
     end_time = time.time()
     print(f'检测结果: {s}, 耗时: {(end_time - start):.3f}ms')
 
