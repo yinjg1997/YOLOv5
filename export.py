@@ -1495,10 +1495,14 @@ def parse_opt(known=False):
         print(opts.weights)
         ```
     """
+    # python export.py --weights runs/train/pubg/weights/best.pt --batch 1 --device cuda:0 --include onnx
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", type=str, default=ROOT / "data/coco128.yaml", help="dataset.yaml path")
     parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "yolov5s.pt", help="model.pt path(s)")
     parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640, 640], help="image (h, w)")
+    # 这里的 --batch 1 意味着导出的 ONNX 模型每次推理时处理一张图像。这种设置在大多数情况下是合适的，特别是当你在 CPU 上进行推理时。你也可以根据需要调整这个值：
+    # 单张图像推理：--batch 1，适用于实时性要求高的应用。
+    # 多张图像批处理：--batch N，适用于批量处理图像的应用。
     parser.add_argument("--batch-size", type=int, default=1, help="batch size")
     parser.add_argument("--device", default="cpu", help="cuda device, i.e. 0 or 0,1,2,3 or cpu")
     parser.add_argument("--half", action="store_true", help="FP16 half-precision export")
@@ -1519,6 +1523,7 @@ def parse_opt(known=False):
     parser.add_argument("--topk-all", type=int, default=100, help="TF.js NMS: topk for all classes to keep")
     parser.add_argument("--iou-thres", type=float, default=0.45, help="TF.js NMS: IoU threshold")
     parser.add_argument("--conf-thres", type=float, default=0.25, help="TF.js NMS: confidence threshold")
+    # 要生成 ONNX 文件，你需要明确指定 --include onnx 参数
     parser.add_argument(
         "--include",
         nargs="+",
