@@ -215,6 +215,16 @@ class YOLOV5_ONNX(object):
             cv2.putText(img, label, (c1[0], c1[1] - 2), 0, tl / 3, [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
 
     def draw(self, img, boxinfo):
+        """
+
+        Args:
+            img: numpy.ndarray
+            boxinfo:  numpy.ndarray  [[87.     467.     251.     640.       0.9608   4.   ]]
+
+        Returns:
+
+        """
+        print(boxinfo)
         colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(len(self.classes))]
         for *xyxy, conf, cls in boxinfo:
             label = '%s %.2f' % (self.classes[int(cls)], conf)
@@ -247,12 +257,16 @@ class YOLOV5_ONNX(object):
 
 
 if __name__ == "__main__":
-    onnx_path = r"../runs/train/pubg/weights/best.onnx"
-    img_path = r"../datasets/pubg/train/images/1_mp4-1_jpg.rf.3a39135373b4db3ccc7d312d8d5fb203.jpg"
-    classes = ['0', '1', '2', '3', 'ddd', '5']  # 长度需要和 yaml 中的nc 数量一样
+    # "[array([[104.2219, 221.4026, 537.1088, 490.1545,   0.7967,   0.    ]])]"
+    # "[tensor([[104.22188, 221.40257, 537.10876, 490.15454,   0.79675,   0.00000]])]"
+    onnx_path = r"../runs/train/anime_pussy_dick/weights/best.onnx"
+    img_path = r"../datasets/anime_dick/test/images/00003-562639343_png_jpg.rf.458d5964b6cffeceb115b4e5b623e893.jpg"
+    classes = ['tar']  # 长度需要和 yaml 中的nc 数量一样
     model = YOLOV5_ONNX(onnx_path=onnx_path, classes=classes)
     model.infer(img_path=img_path)  # infer 会进行画图
+
+    start = time.time()
     s = model.decect(img_path)  # decect 只检测
-    print(s)
-    "[array([[104.2219, 221.4026, 537.1088, 490.1545,   0.7967,   0.    ]])]"
-    "[tensor([[104.22188, 221.40257, 537.10876, 490.15454,   0.79675,   0.00000]])]"
+    end_time = time.time()
+    print(f'检测结果: {s}, 耗时: {(end_time - start):.3f}ms')
+
