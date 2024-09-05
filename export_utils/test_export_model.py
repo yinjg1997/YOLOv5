@@ -1,5 +1,8 @@
 # !/usr/bin/env python
 # -*-coding:utf-8 -*-
+import os.path
+import uuid
+
 import cv2
 import numpy as np
 import onnxruntime
@@ -233,7 +236,7 @@ class YOLOV5_ONNX(object):
 
         # cv2.namedWindow("dst",0)
         # cv2.imshow("dst", img)
-        cv2.imwrite("res1.jpg", img)
+        cv2.imwrite(f"{uuid.uuid4()}.jpg", img)
         # cv2.waitKey(0)
         # cv2.imencode('.jpg', img)[1].tofile(os.path.join(dst, id + ".jpg"))
         return 0
@@ -270,3 +273,7 @@ if __name__ == "__main__":
     end_time = time.time()
     print(f'检测结果: {s}, 耗时: {(end_time - start):.3f}ms')
 
+    # img_dir = r'C:\Users\he3\Desktop\YOLOv5\data\images'
+    # for path in os.listdir(img_dir):
+    #     f_path = os.path.join(img_dir, path)
+    #     model.infer(img_path=f_path)
