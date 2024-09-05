@@ -16,7 +16,7 @@ from export_utils.orientation import tag_images, non_max_suppression
 np.set_printoptions(precision=4)
 
 
-class YOLOV5_ONNX(object):
+class YoloV5Onnx:
     def __init__(self, onnx_path, classes, providers=None):
         '''初始化onnx'''
         if not providers:
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     onnx_path = r"../runs/train/anime_pussy_dick/weights/best.onnx"
     img_path = r"../datasets/anime_dick/test/images/00003-562639343_png_jpg.rf.458d5964b6cffeceb115b4e5b623e893.jpg"
     classes = ['tar']  # 长度需要和 yaml 中的nc 数量一样
-    model = YOLOV5_ONNX(onnx_path=onnx_path, classes=classes)
+    model = YoloV5Onnx(onnx_path=onnx_path, classes=classes)
     model.infer(img_path=img_path)  # infer 会进行画图
 
     start = time.time()
